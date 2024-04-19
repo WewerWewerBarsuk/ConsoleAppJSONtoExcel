@@ -13,6 +13,34 @@ namespace ConsoleAppJSONtoExcel
 
             RootObject? rootObject = JsonConvert.DeserializeObject<RootObject>(jsonstring);
 
+            List<VacancyDataBasedModel> dataOuts = new List<VacancyDataBasedModel>();
+
+            for (int i = 0; i < rootObject?.vacancies?.Count; i++)
+            {
+                VacancyDataBasedModel vacancyDataBasedModel = new VacancyDataBasedModel();
+
+                vacancyDataBasedModel.vacancy_name = rootObject.vacancies[i].vacancy_name;
+                vacancyDataBasedModel.professionalSphereName = rootObject.vacancies[i].professionalSphereName;
+                vacancyDataBasedModel.inn = rootObject.vacancies[i].company["inn"];
+                vacancyDataBasedModel.ogrn = rootObject.vacancies[i].company["ogrn"];
+                vacancyDataBasedModel.kpp = rootObject.vacancies[i].company["kpp"];
+                vacancyDataBasedModel.name = rootObject.vacancies[i].company["name"];
+                vacancyDataBasedModel.education = rootObject.vacancies[i].education;
+                vacancyDataBasedModel.required_experience = rootObject.vacancies[i].required_experience;
+                vacancyDataBasedModel.schedule_type = rootObject.vacancies[i].schedule_type;
+                vacancyDataBasedModel.busy_type = rootObject.vacancies[i].busy_type;
+                vacancyDataBasedModel.salary_min = rootObject.vacancies[i].salary_min;
+                vacancyDataBasedModel.salary_max = rootObject.vacancies[i].salary_max;
+                vacancyDataBasedModel.vac_url = rootObject.vacancies[i].vac_url;
+                vacancyDataBasedModel.date_create= rootObject.vacancies[i].date_create;
+                vacancyDataBasedModel.code_profession= rootObject.vacancies[i].code_profession;
+                vacancyDataBasedModel.vacancy_address= rootObject.vacancies[i].vacancy_address;
+                vacancyDataBasedModel.work_places= rootObject.vacancies[i].work_places;
+                vacancyDataBasedModel.date_modify= rootObject.vacancies[i].date_modify;
+                vacancyDataBasedModel.original_source_type= rootObject.vacancies[i].original_source_type;
+
+                dataOuts.Add(vacancyDataBasedModel);
+            }
 
             Console.WriteLine("It's done!");
         }
