@@ -20,7 +20,7 @@ namespace ConsoleAppJSONtoExcel
         public string? kpp { get; set; }
         public string? name { get; set; }
         public string? education { get; set; }
-        public int required_experience { get; set; }
+        public string? required_experience { get; set; }
         public string? schedule_type { get; set; }
         public string? busy_type { get; set; }
         public int salary_min { get; set; }
@@ -35,7 +35,7 @@ namespace ConsoleAppJSONtoExcel
     }
     public class JsonModel : VacancyDataBasedModel
     {
-        public Dictionary<string, string> company { get; set; }
+        public Dictionary<string, string>? company { get; set; }
         public string? state_region_code { get; set; }
     }
 
