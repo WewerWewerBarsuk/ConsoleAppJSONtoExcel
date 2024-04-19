@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Formats.Tar;
+using System.Reflection;
 using System.Text.Json.Serialization;
 using ClosedXML.Excel;
 using Newtonsoft.Json;
@@ -13,9 +14,24 @@ namespace ConsoleAppJSONtoExcel
             string? pathDownload = @"\Download\vacancy_9.json";
             string? state_rigeon_code = "5000000000000";
 
-            Console.WriteLine(directory);
+            string border = "***********************************************";
+
+            Console.WriteLine("Программа начала работу. Пожалуйста, ожидайте сообщения о том, что выполнение программа полностью завершено\n");
+
+            Console.WriteLine(border);
 
             string pathfileJSON = $"{directory}{pathDownload}";
+
+            Console.WriteLine(File.Exists(pathfileJSON) ? "Скаченный файл в фзормате JSON существует." : "Файл в формате JSON не найден. Скачайте файл");
+            Console.WriteLine(border);
+
+            DateTime timeCreationJSONfile = File.GetCreationTime(pathfileJSON);
+
+            Console.WriteLine($"Дата создания JSON файла - {timeCreationJSONfile}");
+
+            Console.WriteLine(border);
+
+            Console.WriteLine("Запущен процесс разбора файла, подождите...");
 
             RootObject? rootObject = JsonConvert.DeserializeObject<RootObject>(File.ReadAllText(pathfileJSON));
 
@@ -57,16 +73,20 @@ namespace ConsoleAppJSONtoExcel
 
             }
 
-            Console.WriteLine(dataOuts[0].kpp);
+            Console.WriteLine(border);
+            Console.WriteLine("Файл разобран, запущен процесс создания Excel файла, ожидайте...");
 
             using var workbook = new XLWorkbook();
             var worksheet = workbook.AddWorksheet();
 
             worksheet.Cell("A2").InsertData(dataOuts);
-            workbook.SaveAs($"{DateTime.Now.Day}.{DateTime.Now.Month.ToString("00")}.{DateTime.Now.Year}_out.xlsx");
 
+            string nameExcelOutFile = $"{DateTime.Now.Day}.{DateTime.Now.Month.ToString("00")}.{DateTime.Now.Year}_out.xlsx";
 
-            Console.WriteLine("It's done!");
+            workbook.SaveAs(nameExcelOutFile);
+            Console.WriteLine(border);
+
+            Console.WriteLine($"Программа полностью завершена. Файл формата Excel расположен по пути:{directory}\\{nameExcelOutFile}");
         }
     }
 }
