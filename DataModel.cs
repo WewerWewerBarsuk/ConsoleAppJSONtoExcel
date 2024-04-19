@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace ConsoleAppJSONtoExcel
 {
+    public class RootObject
+    {
+        public List<JsonModel>? vacancies {  get; set; }
+    }
 
     public class VacancyDataBasedModel
     {
