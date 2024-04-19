@@ -1,8 +1,7 @@
-﻿using System.Formats.Tar;
-using System.Reflection;
-using System.Text.Json.Serialization;
+﻿using System.Reflection;
 using ClosedXML.Excel;
 using Newtonsoft.Json;
+using System.Xml;
 
 namespace ConsoleAppJSONtoExcel
 {
@@ -10,11 +9,30 @@ namespace ConsoleAppJSONtoExcel
     {
         static void Main(string[] args)
         {
-            string? directory = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location);
-            string? pathDownload = @"\Download\vacancy_9.json";
-            string? state_rigeon_code = "5000000000000";
 
-            string border = "***********************************************";
+            string? directory = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location);
+            string? pathXMLFile = @"\XMLPropertyApp.xml";
+
+            string? state_rigeon_code = null ;
+            string? pathDownload = null;
+
+            string? border = null;
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load($"{directory}{pathXMLFile}");
+            XmlElement? XRoot = doc.DocumentElement;
+            if ( XRoot != null ) 
+            {
+                foreach(XmlNode node in XRoot.ChildNodes ) 
+                {
+                    if ( node.Name == "state_rigeon_code")
+                        state_rigeon_code = node.InnerText;
+                    if (node.Name == "pathDownload")
+                        pathDownload = node.InnerText;
+                    if (node.Name == "border")
+                        border = node.InnerText;
+                }
+            }
 
             Console.WriteLine("Программа начала работу. Пожалуйста, ожидайте сообщения о том, что выполнение программа полностью завершено\n");
 
