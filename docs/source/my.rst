@@ -1,4 +1,4 @@
-MY
+About
 ===
 
 .. autosummary::
