@@ -1,7 +1,7 @@
 Welcome to ConsoleAppJSONtoExcel documentation!
 ===================================
 
-**ConsoleAppJSONtoExcel **  is a C# program for export JSON to Excel file.
+**ConsoleAppJSONtoExcel**  is a C# program for export JSON to Excel file.
 
 Check out the :doc:`usage` section for further information, including
 how to :ref:`installation
