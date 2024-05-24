@@ -17,4 +17,4 @@ Contents
 
    usage
    api
-   my
+   about
